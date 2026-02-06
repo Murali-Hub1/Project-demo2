@@ -1,0 +1,6 @@
+location             = "Central India"
+resource_group_name  = "rg-demo-dev"
+storage_account_name = "demodevsa47532"
+app_service_plan_name = "demo-dev-plan"
+function_app_name     = "demo-dev-func"
+environment = "DEV"

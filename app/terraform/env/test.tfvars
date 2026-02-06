@@ -1,0 +1,6 @@
+location             = "Central India"
+resource_group_name  = "rg-demo-test"
+storage_account_name = "demotestsa47531"
+app_service_plan_name = "demo-test-plan"
+function_app_name     = "demo-test-func"
+environment = "TEST"
