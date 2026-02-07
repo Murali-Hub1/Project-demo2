@@ -1,14 +1,13 @@
 provider "azurerm" {
   features {}
+  subscription_id = "dee8ca1d-5e33-46d7-9599-ca508754fc4d"
 }
 
-# Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = var.resource_group_name
   location = var.location
 }
 
-# Storage Account for Function
 resource "azurerm_storage_account" "sa" {
   name                     = var.storage_account_name
   resource_group_name      = azurerm_resource_group.rg.name
@@ -17,16 +16,14 @@ resource "azurerm_storage_account" "sa" {
   account_replication_type = "LRS"
 }
 
-# App Service Plan (Consumption)
 resource "azurerm_service_plan" "plan" {
-  name                = var.app_service_plan_name
+  name                = "demo-plan"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   os_type             = "Linux"
   sku_name            = "Y1"
 }
 
-# Function App
 resource "azurerm_linux_function_app" "func" {
   name                       = var.function_app_name
   location                   = azurerm_resource_group.rg.location
@@ -37,16 +34,11 @@ resource "azurerm_linux_function_app" "func" {
 
   site_config {
     application_stack {
-      node_version = "16"
+      node_version = "18"
     }
-  }
-
-  identity {
-    type = "SystemAssigned"
   }
 
   app_settings = {
     WEBSITE_RUN_FROM_PACKAGE = "1"
-    ENVIRONMENT = var.environment
   }
 }

@@ -1,0 +1,64 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+variables:
+  terraformFolder: "app/terraform"
+
+stages:
+
+# Terraform Infra
+- stage: Terraform
+  jobs:
+  - job: TerraformDeploy
+    pool:
+      name: agent2   # self-hosted agent
+
+    steps:
+    - checkout: self
+
+    - script: terraform --version
+      displayName: "Check Terraform"
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'azure-free-trial-manual'
+        scriptType: bash
+        scriptLocation: inlineScript
+        inlineScript: |
+          cd $(terraformFolder)
+          terraform init
+          terraform apply -var-file=env/dev.tfvars -auto-approve
+
+# Deploy Function
+- stage: DeployFunction
+  dependsOn: Terraform
+  jobs:
+  - job: Deploy
+    pool:
+      name: agent2
+
+    steps:
+    - checkout: self
+
+    # ZIP function
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(Build.SourcesDirectory)/app/function'
+        includeRootFolder: false
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/function.zip'
+
+    # Deploy ZIP
+    - task: AzureFunctionApp@1
+      inputs:
+        azureSubscription: 'azure-free-trial-manual'
+        appType: 'functionAppLinux'
+        appName: 'demo-dev-func'
+        package: '$(Build.ArtifactStagingDirectory)/function.zip'
+
+
