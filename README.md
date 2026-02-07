@@ -31,6 +31,10 @@ Stage 2: Application Deployment
 ``
 https://demo-dev-func.azurewebsites.net/api/HttpTrigger1
 ``
+- Output:
+
+<img width="383" height="105" alt="image" src="https://github.com/user-attachments/assets/4f96f963-d576-4181-973b-12b24da10fc0" />
+
 
 ## Security Best Practices
 - Terraform state stored in Azure Storage backend
