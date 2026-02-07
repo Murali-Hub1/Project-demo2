@@ -27,8 +27,21 @@ Stage 2: Application Deployment
 ## Application Access
 
 ``
-https://<function-app-name>.azurewebsites.net/api/<function-name>
+https://demo-dev-func.azurewebsites.net/api/HttpTrigger1
 ``
+
+## Security Best Practices
+- Terraform state stored in Azure Storage backend
+- Azure DevOps Service Connection for authentication
+- System-assigned Managed Identity for Function App
+- No manual Azure Portal changes (true IaC)
+
+## What This Project Demonstrates
+- Infrastructure as Code (Terraform)
+- CI/CD automation with Azure DevOps
+- Self-hosted agent configuration
+- Serverless application deployment
+- Enterprise-level debugging and troubleshooting
 
 ## REAL DEVOPS ISSUES DEBUGGED
 1. Terraform State Locking
@@ -62,16 +75,3 @@ https://<function-app-name>.azurewebsites.net/api/<function-name>
 5. Function Endpoint Not Working
    - Cause: Wrong function name (HttpTrigger1)
    - Fix: Listed functions using Azure CLI and corrected URL
-
-## Security Best Practices
-- Terraform state stored in Azure Storage backend
-- Azure DevOps Service Connection for authentication
-- System-assigned Managed Identity for Function App
-- No manual Azure Portal changes (true IaC)
-
-## What This Project Demonstrates
-- Infrastructure as Code (Terraform)
-- CI/CD automation with Azure DevOps
-- Self-hosted agent configuration
-- Serverless application deployment
-- Enterprise-level debugging and troubleshooting
