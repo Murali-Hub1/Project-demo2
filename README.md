@@ -51,8 +51,27 @@ https://<function-app-name>.azurewebsites.net/api/<function-name>
 3. Self-Hosted Agent Missing Tools
    - error:
      ``
-     Unable to locate executable file: terraform, azure CLI, ZIP
+     Unable to locate executable file: terraform, ZIP
      ``
    - fix:
      - Installed OS packages manually
      - Automated dependency installation in pipeline
+4. Azure Function Not Visible
+   - Cause: Incorrect folder structure in ZIP package
+   - Fix: Correct Azure Function directory hierarchy
+5. Function Endpoint Not Working
+   - Cause: Wrong function name (HttpTrigger1)
+   - Fix: Listed functions using Azure CLI and corrected URL
+
+## Security Best Practices
+- Terraform state stored in Azure Storage backend
+- Azure DevOps Service Connection for authentication
+- System-assigned Managed Identity for Function App
+- No manual Azure Portal changes (true IaC)
+
+## What This Project Demonstrates
+- Infrastructure as Code (Terraform)
+- CI/CD automation with Azure DevOps
+- Self-hosted agent configuration
+- Serverless application deployment
+- Enterprise-level debugging and troubleshooting
