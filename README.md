@@ -24,6 +24,8 @@ Stage 2: Application Deployment
 - Package Function App code
 - Deploy ZIP package to Azure Function App
 
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/99fddcf7-e504-4e6e-a3d7-9a810871975b" />    <img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/746878f6-52b5-4f72-b96d-2016c5fe4ea3" />
+
 ## Application Access
 
 ``
